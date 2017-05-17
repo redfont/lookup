@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 12, 2017, 5:43:54 PM
+    Author     : DumaJa01
+*/
+
+.menu {
+	background-color: white;
+}
+
+.menu ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: relative;
+	z-index: 10;
+}
+
+.menu ul li {
+	margin: 0px -7px 0 0;
+	display: inline-block;
+	background-color: white;
+}
+
+.menu a {
+	display: block;
+	padding: 0 10px;
+	color: #4da6ff;
+	font-size: .85em;
+	line-height: 30px;
+	font-weight:bold;
+	text-decoration: none;
+}
+
+.menu a:hover{
+	color:white;
+	background-color: #96858F;
+}
+
+.menu ul ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+}
+
+.menu ul li:hover > ul{
+	display: inherit;
+}
+
+.menu ul ul li {
+	min-width: 100px;
+	display: list-item;
+	position: relative;
+}
