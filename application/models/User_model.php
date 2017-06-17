@@ -25,7 +25,7 @@ class User_model extends CI_Model {
     }
     
     public function get_users() {
-        $this->db->select('id,username,email,date_created as dateCreated,date_updated as dateUpdated');
+        $this->db->select('user_id,username,email,date_created as dateCreated,date_updated as dateUpdated');
         $query = $this->db->get('users');
         return $query->result();
     }
@@ -41,9 +41,9 @@ class User_model extends CI_Model {
     }
     
     public function get_user_by_id($id){
-        $this->db->select('id,username,email as emailAddress,date_created as dateCreated, date_updated as dateUpdated');
+        $this->db->select('user_id,username,email as emailAddress,date_created as dateCreated, date_updated as dateUpdated');
         $this->db->from('users');
-        $this->db->where('id',$id);
+        $this->db->where('user_id',$id);
         $query = $this->db->get();
         return $query->row();
     }
