@@ -11,7 +11,7 @@
         
         <tr ng-repeat="u in vm.users">
             <td>
-                <a href="" ng-click="vm.showDialog($event, u.id)">Edit</a>
+                <a href="" ng-click="vm.showDialog($event, u.user_id)">Edit</a>
                 <a href="#">Delete</a>
             </td>
             <td>{{u.username}}</td>

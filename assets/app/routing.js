@@ -15,7 +15,11 @@
             })
             .when('/user', {
                controller  : 'UserController as vm',
-               templateUrl : 'assets/app/partials/user.php' 
+               templateUrl : 'assets/app/partials/admin/user.php' 
+            })
+            .when('/category', {
+                controller : 'CategoryController as vm',
+                templateUrl: 'assets/app/partials/admin/category.php'
             })
             .when('/', {
                 controller : 'LoginController as vm',
