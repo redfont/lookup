@@ -21,6 +21,12 @@ class Category extends CI_Controller {
     }
     
     function add_category(){
-        
+        $this->load->model('category_model');
+    }
+    
+    function get_category($code) {
+        $this->load->model('category_model');
+        $result = $this->category_model->get_category($code);
+        echo json_encode($result);
     }
 }
