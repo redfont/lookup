@@ -18,11 +18,17 @@ CREATE TABLE `redfin`.`users` (
   `date_updated` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`));
 
+create trigger user_update before update on users
+for each row set NEW.date_updated = CURRENT_TIMESTAMP;
+
 CREATE TABLE `redfin`.`categories` (
   `code` VARCHAR(50) NOT NULL,
   `description` VARCHAR(200) NULL,
   PRIMARY KEY (`code`),
   UNIQUE INDEX `code_UNIQUE` (`code` ASC));
+
+create trigger category_update before update on categories
+for each row set NEW.date_updated = CURRENT_TIMESTAMP;
 
 ALTER TABLE `redfin`.`categories` 
 ADD COLUMN `date_created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP AFTER `description`,
