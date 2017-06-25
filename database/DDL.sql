@@ -38,3 +38,16 @@ ADD COLUMN `updated_by` VARCHAR(100) NULL AFTER `created_by`;
 
 insert into categories(`code`,`description`,`date_created`) values ('D', 'Dress', CURRENT_TIMESTAMP);
 insert into categories(`code`,`description`,`date_created`) values ('S', 'Shorts', CURRENT_TIMESTAMP);
+
+CREATE TABLE `redfin`.`expense_types` (
+  `code` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(200) NULL,
+  `date_created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_updated` TIMESTAMP NULL,
+  `created_by` VARCHAR(100) NULL,
+  `updated_by` VARCHAR(100) NULL,
+  PRIMARY KEY (`code`),
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC));
+
+create trigger expense_type_update before update on expense_types
+for each row set NEW.date_updated = CURRENT_TIMESTAMP;

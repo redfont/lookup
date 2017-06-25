@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    app.controller('CategoryController',['$scope','$http','$mdDialog',CategoryController]);
+    app.controller('ExpenseTypeController',['$scope','$http','$mdDialog',ExpenseTypeController]);
     
-    function CategoryController($scope, $http, $mdDialog){
+    function ExpenseTypeController($scope, $http, $mdDialog){
         var vm = this;
         var update = false;
         var code = null;
@@ -10,16 +10,16 @@
         vm.removeRecord = removeRecord;
         
         init();
-        console.log('category controller');
+        console.log('expense type controller');
         
         function init(){
             $http({
                method:'GET',
-               url: context + '/category/get_all'
+               url: context + '/expense_type/get_all'
             }).then(
                 function success(response){
                     console.log(response.data);
-                    vm.categories = response.data;
+                    vm.expenseTypes = response.data;
                 }, function error(message){
                     console.log(message);
                 }
@@ -35,7 +35,7 @@
             }
             
             $mdDialog.show({
-               templateUrl:'assets/app/partials/templates/category.dialog.template.html',
+               templateUrl:'assets/app/partials/templates/expense_type.dialog.template.html',
                controller : Dialog,
                targetEvent : ev,
                clickOutsideToClose : false,
@@ -50,7 +50,7 @@
         }
         
         function Dialog($scope, $http, $mdDialog) {
-            $scope.category = {};
+            $scope.expenseType = {};
             $scope.update = update;
             
             $scope.hide = function(){
@@ -61,11 +61,11 @@
                 console.log(code);
                 $http({
                    method:'GET', 
-                   url: context + '/category/get_by_key/' + code,
+                   url: context + '/expense_type/get_by_key/' + code,
                    dataType:'json'
                 }).then (function success(response){
                     console.log(response);
-                    $scope.category = response.data[0];
+                    $scope.expenseType = response.data[0];
                 }, function error(message){
                     
                 });
@@ -74,8 +74,8 @@
             $scope.submit = function(){
                 $http({
                     method:'POST',
-                    url: context + ((update) ? '/category/update' : '/category/add'),
-                    data : {'category': $scope.category},
+                    url: context + ((update) ? '/expense_type/update' : '/expense_type/add'),
+                    data : {'expenseType': $scope.expenseType},
                     dataType : 'json'
                 }).then(
                     function success(response) {
@@ -94,14 +94,14 @@
             $mdDialog.show(
                $mdDialog.confirm()
                .title('Delete')
-               .textContent('Are you sure you want to delete this category?')
+               .textContent('Are you sure you want to delete this expense type?')
                .targetEvent(ev)
                .ok('Delete')
                .cancel('Cancel')
             ).then(function() { 
                 $http({
                     method:'GET',
-                    url: context + '/category/delete/' + code,
+                    url: context + '/expense_type/delete/' + code,
                     dataType:'json'
                 }). then(
                     function success(response){

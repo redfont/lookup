@@ -14,42 +14,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Category extends CI_Controller {
     //put your code here
     
-    function get_categories() {
+    function get_all() {
         $this->load->model('category_model');
-        $result = $this->category_model->get_categories();
+        $result = $this->category_model->get_all();
         echo json_encode($result);
     }
     
-    function get_category($code) {
+    function get_by_key($code) {
         $this->load->model('category_model');
-        $result = $this->category_model->get_category($code);
+        $result = $this->category_model->get_by_key($code);
         echo json_encode($result);
     }
     
-    function add_category(){
+    function add(){
      
         $post = $this->input->raw_input_stream;
         $data = (object)json_decode($post);
         
         //do add here
         $this->load->model('category_model'); 
-        $response = $this->category_model->add_category($data);
+        $response = $this->category_model->add($data);
         
         echo json_encode($response);
     }
     
-    function update_category() {
+    function update() {
         $post = $this->input->raw_input_stream;
         $data = (object)json_decode($post);
         
         $this->load->model('category_model'); 
-        $response = $this->category_model->update_category($data);
+        $response = $this->category_model->update($data);
         echo json_encode($response);
     }
     
-    function delete_category($code){
+    function delete($code){
         $this->load->model('category_model');
-        $response = $this->category_model->delete_category($code);
+        $response = $this->category_model->delete($code);
         echo json_encode($response);
     }
 }

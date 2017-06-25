@@ -19,18 +19,18 @@ class Category_model extends CI_Model {
         $this->load->database();
     }
     
-    public function get_categories() {
+    public function get_all() {
         $this->db->order_by('date_created', 'DESC');
         $query = $this->db->get('categories');
         return $query->result();
     }
     
-    public function get_category($code) {
+    public function get_by_key ($code) {
         $query = $this->db->get_where('categories',array('code'=>$code));
         return $query->result();
     }
     
-    public function add_category($data) {
+    public function add ($data) {
         $response = array(
             'success' => false,
             'message' => ''
@@ -49,7 +49,7 @@ class Category_model extends CI_Model {
         return $response;
     }
     
-    public function update_category($data) {
+    public function update ($data) {
        $response = array(
            'success' => false,
            'message' => ''
@@ -66,7 +66,7 @@ class Category_model extends CI_Model {
        return $response;
     }
     
-    function delete_category($code) {
+    public function delete ($code) {
        $response = array(
          'success' => false,
          'message' => ''

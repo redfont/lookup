@@ -29,6 +29,7 @@
                         <ul>
                             <li><a href="#/user">Users</a></li>
                             <li><a href="#/category">Categories</a></li>
+                            <li><a href="#/expense_type">Expense Types</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -54,4 +55,5 @@
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/login.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/user.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/category.controller.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/expenseType.controller.js"></script>
 </html>

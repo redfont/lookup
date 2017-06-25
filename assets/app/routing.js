@@ -21,6 +21,10 @@
                 controller : 'CategoryController as vm',
                 templateUrl: 'assets/app/partials/admin/category.php'
             })
+            .when('/expense_type', {
+                controller : 'ExpenseTypeController as vm',
+                templateUrl: 'assets/app/partials/admin/expense_type.php'
+            })
             .when('/', {
                 controller : 'LoginController as vm',
                 templateUrl: 'assets/app/partials/login.php'
