@@ -51,3 +51,26 @@ CREATE TABLE `redfin`.`expense_types` (
 
 create trigger expense_type_update before update on expense_types
 for each row set NEW.date_updated = CURRENT_TIMESTAMP;
+
+CREATE TABLE `redfin`.`contact_types` (
+  `code` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(200) NULL,
+  `date_created` TIMESTAMP NULL,
+  `date_updated` TIMESTAMP NULL,
+  `created_by` VARCHAR(100) NULL,
+  `updated_by` VARCHAR(100) NULL,
+  PRIMARY KEY (`code`),
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC));
+USE `redfin`;
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS redfin.contact_types_update$$
+USE `redfin`$$
+CREATE TRIGGER `contact_types_update` BEFORE UPDATE ON `contact_types` 
+FOR EACH ROW set NEW.date_updated = CURRENT_TIMESTAMP;
+$$
+DELIMITER ;
+
+ALTER TABLE `redfin`.`contact_types` 
+CHANGE COLUMN `date_created` `date_created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ;
