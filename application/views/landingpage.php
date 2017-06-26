@@ -1,6 +1,8 @@
 <html ng-app="lookup">
     <head>
         
+        <link rel="stylesheet" href="<?php echo asset_url();?>/css/main.css">
+        <link rel="stylesheet" href="<?php echo asset_url();?>/css/override.css">
         <link rel="stylesheet" href="<?php echo asset_url();?>css/menu.css">
         
         <link rel="stylesheet" href="<?php echo asset_url();?>js/ng-material/angular-material.css">
@@ -22,10 +24,16 @@
     
     <body>
         <div ng-controller="RootController as vm">
+            <div style="height: 80px;color:gray;">
+                This is the header
+            </div>
             <div class="menu">
                 <ul>
                     <li>
-                        <a href="#">Admin</a>
+                        <a href="#/homepage">Home</a>
+                    </li>
+                    <li>
+                        <a href="#/homepage">Admin</a>
                         <ul>
                             <li><a href="#/user">Users</a></li>
                             <li><a href="#/category">Categories</a></li>
