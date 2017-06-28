@@ -9,7 +9,6 @@
         vm.reset = reset;
         
         console.log('login info');
-        
         function submit() {
             //console.log(vm.user);
             $http({
@@ -21,6 +20,8 @@
                function success(response) {
                    console.log(response);
                    if(response.data == 'ok') {
+                       $scope.$parent.in_session_style = {'display':'block'};
+                       console.log(response.data);
                        $location.path('/homepage');
                    }
                },

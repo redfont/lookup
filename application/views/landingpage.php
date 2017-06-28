@@ -24,13 +24,17 @@
     
     <body>
         <div ng-controller="RootController as vm">
-            <div style="height: 80px;color:gray;">
+            <div style="height: 80px;color:gray;display:none;" ng-style="in_session_style">
                 This is the header
             </div>
-            <div class="menu">
+            
+            <div class="menu" style="display:none;" ng-style="in_session_style">
                 <ul>
                     <li>
                         <a href="#/homepage">Home</a>
+                    </li>
+                    <li>
+                        <a href="">Suppliers</a>
                     </li>
                     <li>
                         <a href="#/homepage">Admin</a>
@@ -41,10 +45,15 @@
                             <li><a href="#/contact_type">Contact Types</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="" ng-controller="LogoutController" ng-click="logout()">Logout</a>
+                    </li>
                 </ul>
             </div>
             <div ng-view></div>
-            footer
+            <div style="display:none;" ng-style="in_session_style">
+                footer
+            </div>
         </div>
         
     </body>
@@ -62,6 +71,7 @@
 
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/root.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/login.controller.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/logout.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/user.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/category.controller.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>app/controllers/expenseType.controller.js"></script>
