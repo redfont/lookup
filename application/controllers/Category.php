@@ -14,9 +14,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Category extends CI_Controller {
     //put your code here
     
+    public function __contstruct(){
+        parent::__construct();
+        $this->load->library('session');
+    }
+    
     function get_all() {
+        
         $this->load->model('category_model');
-        $result = $this->category_model->get_all();
+        $result['categories'] = $this->category_model->get_all();
+        
+        $user = $this->session->userdata['user'];
+        $result['in_session'] = false;
+        if(isset($user['userId'])) {
+            $result['in_session'] = true;
+        }
         echo json_encode($result);
     }
     

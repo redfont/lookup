@@ -14,6 +14,12 @@ class Login extends CI_Controller {
         $data = (object)json_decode($post);
         $user = $this->user_model->get_user_by_username($data->user->username);
         if(password_verify($data->user->password, $user['data']->password)){
+            $arr = array(
+              'userId' => $user['data']->user_id,
+              'userName' =>$user['data']->username,
+              'email' => $user['data']->email  
+            );
+            $this->session->set_userdata('user',$arr);
             echo 'ok';
         } else {
             echo 'fail';

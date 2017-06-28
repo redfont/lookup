@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    app.controller('CategoryController',['$scope','$http','$mdDialog',CategoryController]);
+    app.controller('CategoryController',['$scope','$http','$location','$mdDialog',CategoryController]);
     
-    function CategoryController($scope, $http, $mdDialog){
+    function CategoryController($scope, $http, $location, $mdDialog){
         var vm = this;
         var update = false;
         var code = null;
@@ -19,7 +19,11 @@
             }).then(
                 function success(response){
                     console.log(response.data);
-                    vm.categories = response.data;
+                    if(!response.data.in_session){
+                        $location.path('/');
+                    }
+                    vm.categories = response.data.categories;
+                    
                 }, function error(message){
                     console.log(message);
                 }
