@@ -13,6 +13,11 @@
  */
 class User extends CI_Controller{
     //put your code here
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+    }
+    
     function add_user(){
         
         $this->load->model('user_model');
@@ -34,7 +39,14 @@ class User extends CI_Controller{
     
     function get_users(){
        $this->load->model('user_model');
-       $users = $this->user_model->get_users();
+       $users['users'] = $this->user_model->get_users();
+       
+       $user = $this->session->userdata['user'];
+        $user['in_session'] = false;
+        if(isset($user['userId'])) {
+            $user['in_session'] = true;
+        }
+        
        echo json_encode($users);
     }
     

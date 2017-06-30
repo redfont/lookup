@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    app.controller('ExpenseTypeController',['$scope','$http','$mdDialog',ExpenseTypeController]);
+    app.controller('ExpenseTypeController',['$location','$scope','$http','$mdDialog',ExpenseTypeController]);
     
-    function ExpenseTypeController($scope, $http, $mdDialog){
+    function ExpenseTypeController($location, $scope, $http, $mdDialog){
         var vm = this;
         var update = false;
         var code = null;
@@ -19,6 +19,11 @@
             }).then(
                 function success(response){
                     console.log(response.data);
+                    if(!response.data.in_session){
+                        $location.path('/');
+                    } else {
+                        $scope.$parent.in_session_style = {'display':'block'};
+                    }
                     vm.expenseTypes = response.data;
                 }, function error(message){
                     console.log(message);

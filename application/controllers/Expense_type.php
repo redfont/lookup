@@ -13,9 +13,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Expense_type extends CI_Controller {
     
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+    }
+    
     function get_all(){
         $this->load->model('expense_type_model');
-        $result = $this->expense_type_model->get_all();
+        $result['expenseTypes'] = $this->expense_type_model->get_all();
+        
+        $user = $this->session->userdata['user'];
+        $result['in_session'] = false;
+        if(isset($user['userId'])) {
+            $result['in_session'] = true;
+        }
+        
         echo json_encode($result);
     }
     

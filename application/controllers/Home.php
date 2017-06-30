@@ -8,7 +8,6 @@ class Home extends CI_Controller {
     }
     
     public function index(){
-        $this->session->unset_userdata('user');
         $this->load->helper('url');
         $this->load->view('landingpage');
     }

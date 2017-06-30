@@ -13,9 +13,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Contact_type extends CI_Controller {
     
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+    }
+    
     function get_all(){
         $this->load->model('contact_type_model');
-        $result = $this->contact_type_model->get_all();
+        $result['contactTypes'] = $this->contact_type_model->get_all();
+        
+        $user = $this->session->userdata['user'];
+        $result['in_session'] = false;
+        if(isset($user['userId'])) {
+            $result['in_session'] = true;
+        }
+        
         echo json_encode($result);
     }
     

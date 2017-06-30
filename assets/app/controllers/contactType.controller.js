@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    app.controller('ContactTypeController',['$scope','$http','$mdDialog',ContactTypeController]);
+    app.controller('ContactTypeController',['$location','$scope','$http','$mdDialog',ContactTypeController]);
     
-    function ContactTypeController($scope, $http, $mdDialog){
+    function ContactTypeController($location, $scope, $http, $mdDialog){
         var vm = this;
         var update = false;
         var code = null;
@@ -18,8 +18,13 @@
                url: context + '/contact_type/get_all'
             }).then(
                 function success(response){
+                    if(!response.data.in_session){
+                        $location.path('/');
+                    } else {
+                        $scope.$parent.in_session_style = {'display':'block'};
+                    }
                     console.log(response.data);
-                    vm.contactTypes = response.data;
+                    vm.contactTypes = response.data.contactTypes;
                 }, function error(message){
                     console.log(message);
                 }

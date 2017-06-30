@@ -25,4 +25,16 @@ class Login extends CI_Controller {
             echo 'fail';
         }
     }
+    
+    public function check_session() {
+        $user = $this->session->user;
+        
+        $response['message'] = '';
+        $response['in_session'] = false;
+        
+        if(isset($user)) {
+            $response['in_session'] = true;
+        }
+        echo json_encode($response);
+    }
 }

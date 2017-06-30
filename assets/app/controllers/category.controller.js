@@ -21,9 +21,10 @@
                     console.log(response.data);
                     if(!response.data.in_session){
                         $location.path('/');
+                    } else {
+                        $scope.$parent.in_session_style = {'display':'block'};
                     }
                     vm.categories = response.data.categories;
-                    
                 }, function error(message){
                     console.log(message);
                 }

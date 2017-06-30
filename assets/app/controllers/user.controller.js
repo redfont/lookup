@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    app.controller('UserController',['$scope','$http','$mdDialog',UserController]);
+    app.controller('UserController',['$location','$scope','$http','$mdDialog',UserController]);
     
-    function UserController($scope, $http, $mdDialog) {
+    function UserController($location, $scope, $http, $mdDialog) {
         var vm = this;
         var update = false;
         var userId = 0;
@@ -19,6 +19,11 @@
                 url: context + '/user/get_users'
             }).then(function success(response){
                 console.log(response.data);
+                if(!response.data.in_session){
+                    $location.path('/');
+                } else {
+                    $scope.$parent.in_session_style = {'display':'block'};
+                }
                 vm.users = response.data;
             }, function error(message){
                 

@@ -24,11 +24,12 @@
     
     <body>
         <div ng-controller="RootController as vm">
-            <div style="height: 80px;color:gray;display:none;" ng-style="in_session_style">
+            
+            <div style="height: 80px;color:gray;display:none;" ng-model="in_session" ng-style="in_session_style">
                 This is the header
             </div>
             
-            <div class="menu" style="display:none;" ng-style="in_session_style">
+            <div class="menu" style="display:none;" ng-model="in_session" ng-style="in_session_style">
                 <ul>
                     <li>
                         <a href="#/homepage">Home</a>
@@ -51,7 +52,7 @@
                 </ul>
             </div>
             <div ng-view></div>
-            <div style="display:none;" ng-style="in_session_style">
+            <div style="display:none;" ng-model="in_session" ng-style="in_session_style">
                 footer
             </div>
         </div>
