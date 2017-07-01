@@ -16,7 +16,7 @@
         <tr ng-repeat="u in vm.users" class="data-main">
             <td style="text-align: center;">
                 <a href="" ng-click="vm.showDialog($event, u.user_id)">Edit</a>
-                <a href="#">Delete</a>
+                <a href="" ng-click="vm.removeRecord($event, u.user_id)">Delete</a>
             </td>
             <td>{{u.username}}</td>
             <td>{{u.email}}</td>

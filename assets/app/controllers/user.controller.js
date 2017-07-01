@@ -7,6 +7,8 @@
         var update = false;
         var userId = 0;
         vm.user = {};
+        vm.removeRecord = removeRecord;
+        
         console.log('user controller');
         
         vm.showDialog = showDialog;
@@ -73,11 +75,11 @@
                     
                 });
             }
-            
+            console.log(update);
             $scope.submit = function(){
                 $http({
                     method:'POST',
-                    url: context + '/user/add_user',
+                    url: context + ((update) ? '/user/update' : '/user/add_user'),
                     data : {'user': $scope.user},
                     dataType : 'json'
                 }).then(
@@ -90,6 +92,32 @@
                     }
                 );
             }
+        }
+        
+        function removeRecord(ev, id) {
+            console.log(id);
+            $mdDialog.show(
+               $mdDialog.confirm()
+               .title('Delete')
+               .textContent('Are you sure you want to delete this user?')
+               .targetEvent(ev)
+               .ok('Delete')
+               .cancel('Cancel')
+            ).then(function() { 
+                $http({
+                    method:'GET',
+                    url: context + '/user/delete/' + id,
+                    dataType:'json'
+                }). then(
+                    function success(response){
+                        init();
+                    },function error(err){
+                        console.log(err);
+                    }
+                );
+            }, function() {
+                console.log('canceled');
+            });
         }
     }
     

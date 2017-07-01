@@ -53,4 +53,18 @@ class User extends CI_Controller{
         $result = $this->user_model->get_user_by_id($id);
         echo json_encode(array('user'=>$result));
     }
+    
+    public function update() {
+        $post = $this->input->raw_input_stream;
+        $data = (object)json_decode($post);
+        $this->load->model('user_model');
+        $response = $this->user_model->update($data);
+        echo json_encode($response);
+    }
+    
+    public function delete($id) {
+        $this->load->model('user_model');
+        $response = $this->user_model->delete($id);
+        echo json_encode($response);
+    }
 }

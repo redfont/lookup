@@ -47,4 +47,43 @@ class User_model extends CI_Model {
         $query = $this->db->get();
         return $query->row();
     }
+    
+    public function delete($id){
+        $response = array(
+         'success' => false,
+         'message' => ''
+       );
+        
+        try{
+            $response['success'] = $this->db->delete('users',array('user_id'=>$id));
+        } catch (Exception $ex) {
+            $response['success'] = false;
+            $response['message'] = $ex->getMessage();
+        }
+        return $response;
+    }
+    
+    public function update ($data) {
+       $response = array(
+           'success' => false,
+           'message' => ''
+       );
+       
+       try{
+            if(isset($data->user->emailAddress)){
+                $this->db->set('email', $data->user->emailAddress);
+            }
+            
+            if(isset($data->user->password)){
+                $this->db->set('password', password_hash($data->user->password,PASSWORD_BCRYPT));
+            }
+            
+            $this->db->where('user_id', $data->user->user_id);
+            $response['success'] = $this->db->update('users');
+       } catch (Exception $ex) {
+           $response['success'] = false;
+           $response['message'] = $ex->getMessage();
+       }
+       return $response;
+    }
 }
