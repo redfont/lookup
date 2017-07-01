@@ -36,7 +36,8 @@ class Expense_type_model extends CI_Model {
         );
         $expense_type = array(
             'code' => $data->expenseType->code,
-            'description' => $data->expenseType->description
+            'description' => $data->expenseType->description,
+            'created_by' => $data->expenseType->created_by   
         );
         
         try {
@@ -56,6 +57,7 @@ class Expense_type_model extends CI_Model {
        
        try{
             $this->db->set('description', $data->expenseType->description);
+            $this->db->set('updated_by', $data->expenseType->updated_by);
             $this->db->where('code', $data->expenseType->code);
             $response['success'] = $this->db->update('expense_types');
        } catch (Exception $ex) {

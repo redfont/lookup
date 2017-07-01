@@ -36,7 +36,8 @@ class Contact_type_model extends CI_Model {
         );
         $expense_type = array(
             'code' => $data->contactType->code,
-            'description' => $data->contactType->description
+            'description' => $data->contactType->description,
+            'created_by' => $data->contactType->created_by
         );
         
         try {
@@ -56,6 +57,7 @@ class Contact_type_model extends CI_Model {
        
        try{
             $this->db->set('description', $data->contactType->description);
+            $this->db->set('updated_by', $data->contactType->updated_by);
             $this->db->where('code', $data->contactType->code);
             $response['success'] = $this->db->update('contact_types');
        } catch (Exception $ex) {

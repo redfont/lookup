@@ -24,7 +24,7 @@
                 } else {
                     $scope.$parent.in_session_style = {'display':'block'};
                 }
-                vm.users = response.data;
+                vm.users = response.data.users;
             }, function error(message){
                 
             });
@@ -46,8 +46,8 @@
                clickOutsideToClose : false,
                parent: angular.element(document.body)
             }).then(function (response) {
-                conslog.log(response);
                 console.log('submitted');   
+                init();
             },function () {
                 console.log('cancelled');
             });

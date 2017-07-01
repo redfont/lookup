@@ -37,7 +37,8 @@ class Category_model extends CI_Model {
         );
         $category = array(
             'code' => $data->category->code,
-            'description' => $data->category->description
+            'description' => $data->category->description,
+            'created_by' => $data->category->created_by    
         );
         
         try {
@@ -57,6 +58,7 @@ class Category_model extends CI_Model {
        
        try{
             $this->db->set('description', $data->category->description);
+            $this->db->set('updated_by', $data->category->updated_by);
             $this->db->where('code', $data->category->code);
             $response['success'] = $this->db->update('categories');
        } catch (Exception $ex) {

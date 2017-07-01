@@ -13,22 +13,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Category extends CI_Controller {
     //put your code here
+    private $user;
     
-    public function __contstruct(){
+    public function __construct(){
         parent::__construct();
         $this->load->library('session');
+        $this->user = $this->session->userdata['user'];
     }
     
     function get_all() {
-        
         $this->load->model('category_model');
         $result['categories'] = $this->category_model->get_all();
         
-        $user = $this->session->userdata['user'];
         $result['in_session'] = false;
-        if(isset($user['userId'])) {
+        if(isset($this->user['userId'])) {
             $result['in_session'] = true;
         }
+        
         echo json_encode($result);
     }
     
@@ -42,7 +43,7 @@ class Category extends CI_Controller {
      
         $post = $this->input->raw_input_stream;
         $data = (object)json_decode($post);
-        
+        $data->category->created_by = $this->user['username'];
         //do add here
         $this->load->model('category_model'); 
         $response = $this->category_model->add($data);
@@ -53,6 +54,7 @@ class Category extends CI_Controller {
     function update() {
         $post = $this->input->raw_input_stream;
         $data = (object)json_decode($post);
+        $data->category->updated_by = $this->user['username'];
         
         $this->load->model('category_model'); 
         $response = $this->category_model->update($data);

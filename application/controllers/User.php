@@ -13,15 +13,16 @@
  */
 class User extends CI_Controller{
     //put your code here
+    private $user;
+    
     public function __construct() {
         parent::__construct();
         $this->load->library('session');
+        $this->user = $this->session->userdata['user'];
     }
     
     function add_user(){
-        
         $this->load->model('user_model');
-        
         $post = $this->input->raw_input_stream;
         $data = (object)json_decode($post);
         $trans = $this->user_model->add_user($data);
@@ -38,16 +39,13 @@ class User extends CI_Controller{
     }
     
     function get_users(){
-       $this->load->model('user_model');
-       $users['users'] = $this->user_model->get_users();
-       
-       $user = $this->session->userdata['user'];
-        $user['in_session'] = false;
-        if(isset($user['userId'])) {
-            $user['in_session'] = true;
+        $this->load->model('user_model');
+        $users['users'] = $this->user_model->get_users();
+        $users['in_session'] = false;
+        if(isset($this->user['userId'])) {
+            $users['in_session'] = true;
         }
-        
-       echo json_encode($users);
+        echo json_encode($users);
     }
     
     public function get_user($id) {

@@ -24,7 +24,7 @@
                     } else {
                         $scope.$parent.in_session_style = {'display':'block'};
                     }
-                    vm.expenseTypes = response.data;
+                    vm.expenseTypes = response.data.expenseTypes;
                 }, function error(message){
                     console.log(message);
                 }
