@@ -11,6 +11,7 @@
  *
  * @author jrdumayag
  */
+require_once 'Common_DB_Operation.php';
 class Person_model extends CI_Model implements Common_DB_Operation {
     //put your code here
     public function __construct() {
